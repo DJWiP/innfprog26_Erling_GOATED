@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="nb">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array Cheat Sheet: multidimensjonal array</title>
+
+    <style>
+        #books, #longreads {
+            display: flex;
+            gap: .5rem;
+        }
+        article{
+            border: 1px solid silver;
+            background: grey;
+            padding: .5rem;
+            box-sizing: border-box;
+            width: 33%;
+        }
+    </style>
+</head>
+<body>
+<h2>Referansetest</h2>
+ <p>Henter tittle på bok 3: <span id="book3_title"></span></p>
+ <p>Henter forfatter(e) på bok 2: <span id="book2_author2"></span></p>
+
+    <h2>Bokregister</h2>
+    <section id="books">
+        <p>Laster inn bøker...</p>
+    </section>
+
+    <h2>Langlesning</h2>
+    <section id="longreads">
+        <p>Laster inn bøker...</p>
+    </section>
+
+    <h2>Bøker med mer enn 1 forfatter</h2>
+    <section id="author_multiple">
+        <p>Laster inn forfattere</p>
+    </section>
+
+    <script>
+        const bokregister = [
+            {
+                title: "Fourth Wing",
+                author: ["Rebecca Yarps"],
+                page_count: 512,
+                isbn: 9780349437019
+            },
+            {
+                title: "Silver Eyes",
+                author: ["Scott Cawthon", "Kira Wrisley"],
+                page_count: 365,
+                isbn:9781338134377
+            },
+            {
+                title: "Harry Potter og de vises sten",
+                author: ["JK Rowling"],
+                page_count: 333,
+                isbn: 9788202434687
+            },
+        ]
+
+        console.log(bokregister)
+
+        //henter tittle på bok 3: 
+        document.getElementById("book3_title").innerHTML = bokregister[2].title
+        document.getElementById("book2_author2").innerHTML = bokregister[1].author.join(", ")
+
+        //bruker .map for å hente alle bøker, og bygger HTML i booksHTML-variabelen
+        let booksHTML = ""
+        bokregister.map(b => { booksHTML += 
+            `<article>
+                <img src="https://covers.openlibrary.org/b/isbn/${b.isbn}-M.jpg" />
+                <h3>${b.title}</h3>
+                <p class="isbn_number">${b.isbn}</p>
+                <p>${b.author.length === 1 ? "Forfatter" : "Forfattere"}:${b.author.join(", ")}</p>
+                <p>Sidetall: ${b.page_count}</p>
+            </article>` })
+        console.log(booksHTML)
+        document.getElementById("books").innerHTML = booksHTML 
+        // booksHTML += `<article><h3>${b.title}</h3></article>` }) dette er en template literal, en annen konkatinering
+
+        //Bruker .filter for å filtrere ut bøker med mer enn 400 sider.
+        let longreadHTML = ""
+        const longReads = bookregister.filter(l => l.page_count >= 400)
+        console.log("Longread: ", longReads)
+        longReads.map(l => {
+            longreadHTML += 
+            `<article>
+                <img src="https://covers.openlibrary.org/b/isbn/${l.isbn}-M.jpg" />
+                <h3>${l.title}</h3>
+                <p class="isbn_number">${l.isbn}</p>
+                <p>${l.author.length === 1 ? "Forfatter" : "Forfattere"}:${l.author.join(", ")}</p>
+                <p>Sidetall: ${l.page_count}</p>
+            </article>`
+        })
+        document.getElementById("longreads").innerHTML = longreadHTML
+
+        let author_multipleHTML = ""
+        const authorMultiple = bookregister.filter(a => a.author.length > 1)
+    </script>
+</body>
+</html>

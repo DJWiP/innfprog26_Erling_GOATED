@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cheat Sheet Variabler</title>
+</head>
+<body>
+    <h1>Variabler i Javascript</h1>
+    <p>Hei, <span id="name"></span> (<span id="age">?</span>år)</p>
+
+    <h2>handlekruv</h2>
+    <ul>
+        <li>Antall produkter: <span id="quantity_span">0</span></li>
+        <li>Pris: <span id="price_span">0</span>Kroner</li>
+        <li>sum: <span id="total_span">0</span>kroner</li>
+    </ul>
+
+    <script>
+    //Deklarere Variabler
+        /*
+         Const: deklarere en konstant verdi som ikke skal endres
+         let: deklarere en verdi som kan endres
+         */
+        const firstname = "Erling Andreassen"
+        const lastname = "Oppen"
+        console.log(lastname , firstname)
+        //Skriv ut first-verdi til HTML-element med id name
+        //Vi bruker konkatinering, alstå slår sammen variabler og tekst, for å skrive ut foranvn + etternavn:
+        document.getElementById("name").innerHTML = firstname + " " + lastname 
+
+        //Deklarere en variabel for alder
+        const birthYear = 1998
+        let age = 2026 - birthYear 
+        document.getElementById("age").innerHTML = age
+
+        //Forbereder handlekurv
+        let product_quantity = 3
+        const product_price = 666
+        let price_total = product_quantity * product_price
+        
+        document.getElementById("quantity_span").innerHTML = product_quantity
+        document.getElementById("price_span").innerHTML = product_price
+        document.getElementById("total_span").innerHTML = price_total 
+    </script>
+</body>
+</html>
