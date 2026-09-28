@@ -34,16 +34,16 @@
         <p>Laster inn bøker...</p>
     </section>
 
-    <h2>Bøker med mer enn 1 forfatter</h2>
-    <section id="author_multiple">
-        <p>Laster inn forfattere</p>
+    <h2>Bok med flere forfattere</h2>
+    <section id="multiAuthor">
+        <p>Laster inn forfattere...</p>
     </section>
 
     <script>
         const bokregister = [
             {
                 title: "Fourth Wing",
-                author: ["Rebecca Yarps"],
+                author: ["Rebecca Yarros"],
                 page_count: 512,
                 isbn: 9780349437019
             },
@@ -83,7 +83,7 @@
 
         //Bruker .filter for å filtrere ut bøker med mer enn 400 sider.
         let longreadHTML = ""
-        const longReads = bookregister.filter(l => l.page_count >= 400)
+        const longReads = bokregister.filter(l => l.page_count >= 400)
         console.log("Longread: ", longReads)
         longReads.map(l => {
             longreadHTML += 
@@ -97,8 +97,21 @@
         })
         document.getElementById("longreads").innerHTML = longreadHTML
 
-        let author_multipleHTML = ""
-        const authorMultiple = bookregister.filter(a => a.author.length > 1)
+        //forsøk på å bruke .filter for flere forfattere, Husk .length til neste gang og ikke bruk ">= 1" men ">" >
+        let multiAuthorHTML = ""
+        const multiauthor = bokregister.filter(a => a.author.length > 1)
+        console.log("multiAuthor: ", multiauthor)
+        multiauthor.map(a => {
+            multiAuthorHTML +=
+            `<article>
+                <img src="https://covers.openlibrary.org/b/isbn/${a.isbn}-M.jpg" />
+                <h3>${a.title}</h3>
+                <p class="isbn_number">${a.isbn}</p>
+                <p>${a.author.length === 1 ? "Forfatter" : "Forfattere"}:${a.author.join(", ")}</p>
+                <p>Sidetall: ${a.page_count}</p>
+            </article>`
+        }) 
+        document.getElementById("multiAuthor").innerHTML = multiAuthorHTML
     </script>
 </body>
 </html>
